@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-class CustomDrawer extends StatefulWidget {
-  @override
-  _CustomDrawerState createState() => _CustomDrawerState();
-}
+class CustomDrawer extends StatelessWidget {
+  final int page;
+  final Function(int) onTap;
 
-class _CustomDrawerState extends State<CustomDrawer> {
-  int page = 0;
+  const CustomDrawer({Key key, this.page, this.onTap}) : super(key: key);
   
   @override
   Widget build(BuildContext context) {
@@ -20,17 +18,10 @@ class _CustomDrawerState extends State<CustomDrawer> {
               ),
             ),
 
-            ListTile(selected: page == 0, title:Text('vermelho'), onTap:() {setState(() {              
-            }); page = 0;},),
-            ListTile(selected: page == 1, title:Text('verde'), onTap:() {setState(() {
-              
-            }); page = 1;},),
-            ListTile(selected: page == 2, title:Text('Azul'), onTap:() {setState(() {
-              
-            }); page = 2;},),
-            ListTile(selected: page == 3, title:Text('Preto'), onTap:() {setState(() {
-              
-            }); page = 3;},),            
+            ListTile(selected: page == 0, title:Text('vermelho'), onTap:() {onTap(0);},),
+            ListTile(selected: page == 1, title:Text('verde'), onTap:() {onTap(1);},),
+            ListTile(selected: page == 2, title:Text('Azul'), onTap:() {onTap(2);},),
+            ListTile(selected: page == 3, title:Text('Preto'), onTap:() {onTap(3);},),            
           ],
         )
       );

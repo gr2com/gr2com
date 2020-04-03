@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'custom_drawer.dart';
 
 class HomePage extends StatefulWidget {
@@ -13,7 +12,14 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: CustomDrawer(),
+      drawer: CustomDrawer(
+        onTap: (int value) {
+          setState(() {
+            page = value;
+          });
+          Navigator.pop(context);
+        },
+      ),
       appBar: AppBar(
         title: Text('Home pag 1'),
       ),
