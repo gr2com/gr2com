@@ -130,7 +130,7 @@ class _Screen3State extends State<Screen3> {
       floatingActionButton: FloatingActionButton(
         onPressed: (){
           Navigator.pushReplacement(
-            context, CupertinoPageRoute(builder: (context) => Screen2()))
+            context, CupertinoPageRoute(builder: (context) => Screen2()));
         } ,
         
         tooltip: 'Increment',
