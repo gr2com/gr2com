@@ -1,147 +1,61 @@
-import 'package:flutter/cupertino.dart';
+import 'package:delivery/circular_image.dart';
+import 'package:delivery/menu_page.dart';
 import 'package:flutter/material.dart';
+import 'package:delivery/zoom_scaffold.dart';
+import 'package:provider/provider.dart';
 
-import 'home.dart';
-
-void main() {
-  runApp(MyApp());
-}
-
-
-
-
+void main() => runApp(new MyApp());
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.orange,
+    return new MaterialApp(
+      title: 'Zoom Menu',
+      theme: new ThemeData(
+        primarySwatch: Colors.blue,
       ),
-      home: HomePage(),
+      home: new MyHomePage(),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
-  final String title;
-
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  _MyHomePageState createState() => new _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
+  MenuController menuController;
 
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
+  @override
+  void initState() {
+    super.initState();
+
+    menuController = new MenuController(
+      vsync: this,
+    )..addListener(() => setState(() {}));
+  }
+
+  @override
+  void dispose() {
+    menuController.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
+    return ChangeNotifierProvider(
+      builder: (context) => menuController,
+      child: ZoomScaffold(
+        menuScreen: MenuScreen(),
+        contentScreen: Layout(
+            contentBuilder: (cc) => Container(
+                  color: Colors.grey[200],
+                  child: Container(
+                    color: Colors.grey[200],
+                  ),
+                )),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () async {
-          final result = await Navigator.push(
-            context, MaterialPageRoute(builder: (context) => Screen2() ));
-            print(result);
-        },
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
-  }
-}
-
-
-class Screen2 extends StatefulWidget {
-  @override
-  _Screen2State createState() => _Screen2State();
-}
-
-class _Screen2State extends State<Screen2> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Tela 2'),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
-            ),            
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed:  () {
-          Navigator.pop(context, 'teste result');
-          // Navigator.push(
-          //   context, MaterialPageRoute(builder: (context) => Screen3() ));
-        },
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
-    );
-  }
-}
-
-class Screen3 extends StatefulWidget {
-  @override
-  _Screen3State createState() => _Screen3State();
-}
-
-class _Screen3State extends State<Screen3> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Tela 3'),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
-            ),            
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: (){
-          Navigator.pushReplacement(
-            context, CupertinoPageRoute(builder: (context) => Screen2()));
-        } ,
-        
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
-    );;
   }
 }
