@@ -3,6 +3,8 @@
 https://www.filledstacks.com/post/create-and-deploy-a-flutter-web-app/
 #2 Responsivo
 https://www.filledstacks.com/post/building-a-responsive-website-using-flutter/
+#3
+https://www.filledstacks.com/post/template-layouts-and-navigation-in-flutter-web/
 
 
 A new Flutter project.
